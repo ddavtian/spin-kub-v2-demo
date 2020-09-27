@@ -57,13 +57,16 @@ pipeline {
         }
         
         stage ('build helm chart') {
+          environment {
+            HELM_CREDS = credentials('e5-labs-helm-repo')
+          }
           steps {
             container('helm') {
                 echo "Building Helm Chart"
                 sh "apk --no-cache add curl"
                 sh "helm repo add e5-labs-helm https://nexus.e5labs.com/repository/helm-hosted/"
                 sh "helm package chart"
-                sh "curl https://nexus.e5labs.com/repository/helm-hosted/ --upload-file spin-kub-v2-demo-0.1.0.tgz -v"
+                sh "curl -u $HELM_CREDS https://nexus.e5labs.com/repository/helm-hosted/ --upload-file spin-kub-v2-demo-0.1.0.tgz -v"
             }
           }
         }
