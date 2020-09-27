@@ -26,11 +26,9 @@ pipeline {
             container('docker') {
               echo "Building Application"
               sh "docker version"
-              sh "docker build -t docker.e5labs.com/e5labs/spin-kub-v2-demo ."
-            
-              withDockerRegistry(credentialsId: 'e5-labs-docker-repo', url: 'https://docker.e5labs.com') {
-                sh "docker push docker.e5labs.com/e5labs/spin-kub-v2-demo"
-              }
+              docker.withRegistry("https://docker.e5labs.com", 'e5-labs-docker-repo') {
+                docker.image("docker.e5labs.com/e5labs/spin-kub-v2-demo").build()
+                docker.image.push()
             }
           }
         }
