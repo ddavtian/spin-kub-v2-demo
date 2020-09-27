@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: primary
-        image: docker.e5labs.com/spin-kub-v2-demo:{{ .Values.build }}
+        image: docker.e5labs.com/e5labs/spin-kub-v2-demo:{{ .Values.build }}
         ports:
         - containerPort: 8000
         readinessProbe:
