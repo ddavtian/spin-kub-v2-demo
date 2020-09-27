@@ -29,6 +29,7 @@ pipeline {
               docker.withRegistry("https://docker.e5labs.com", 'e5-labs-docker-repo') {
                 docker.image("docker.e5labs.com/e5labs/spin-kub-v2-demo").build()
                 docker.image.push()
+              }
             }
           }
         }
