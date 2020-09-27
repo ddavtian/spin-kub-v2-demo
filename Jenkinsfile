@@ -6,8 +6,8 @@ pipeline {
     }
 
     environment {
-      registry = "https://docker.e5labs.com"
-      dockerImage = 'docker.e5labs.com/e5labs/spin-kub-v2-demo'
+      registry = "docker.e5labs.com/e5labs/spin-kub-v2-demo"
+      dockerImage = ''
     }
     
     agent { node { label 'kube-agent' } }
@@ -30,7 +30,7 @@ pipeline {
           steps {
             container('docker') {
               script {
-                dockerImage = docker.build $dockerImage + ":latest"
+                dockerImage = docker.build registry + ":latest"
               }
             }
           }
