@@ -39,7 +39,7 @@ pipeline {
           steps {
             container('helm') {
                 echo "Building Helm Chart"
-                sh "apt-get update; apt-get install curl"
+                sh "apk --no-cache add curl"
                 sh "helm repo add e5-labs-helm https://nexus.e5labs.com/repository/helm-hosted/"
                 sh "helm package chart"
                 sh "curl https://nexus.e5labs.com/repository/helm-hosted/ --upload-file spin-kub-v2-demo-0.1.0.tgz -v"
