@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: spinnaker-demo
+  namespace: spin-kub-v2-demo
+spec:
+  selector:
+    source: demo
+    app: spinnaker
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8000
+  type: LoadBalancer

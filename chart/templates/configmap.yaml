@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: spinnaker-demo-config
+  namespace: spin-kub-v2-demo
+data:
+  NEW_FEATURE: "true"

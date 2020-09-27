@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spinnaker-demo
+  namespace: spin-kub-v2-demo
+  labels:
+    source: demo
+    stack: frontend
+    app: spinnaker
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      source: demo
+      app: spinnaker
+  template:
+    metadata:
+      labels:
+        source: demo
+        app: spinnaker
+    spec:
+      containers:
+      - name: primary
+        image: docker.e5labs.com/spin-kub-v2-demo:latest
+        ports:
+        - containerPort: 8000
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8000
+        envFrom:
+        - configMapRef:
+            name: spinnaker-demo-config
