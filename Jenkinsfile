@@ -10,12 +10,12 @@ pipeline {
     // Pipeline stages
     stages {
         stage ('checkout from scm') {
-          container('docker') {
-            steps {
-                echo "Checking out code"
-                git branch: "master",
-                    credentialsId: 'jenkins-ssh-key',
-                    url: 'git@github.com:ddavtian/spin-kub-v2-demo.git'
+          steps {
+            container('docker') {
+              echo "Checking out code"
+              git branch: "master",
+                  credentialsId: 'jenkins-ssh-key',
+                  url: 'git@github.com:ddavtian/spin-kub-v2-demo.git'
             }
           }
         }
