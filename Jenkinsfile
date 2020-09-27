@@ -39,7 +39,7 @@ pipeline {
           steps {
             container('helm') {
                 echo "Building Helm Chart"
-                sh "helm package /chart"
+                sh "helm package chart"
             }
           }
         }
