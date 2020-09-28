@@ -59,6 +59,7 @@ pipeline {
         stage ('build helm chart') {
           environment {
             HELM_CREDS = credentials('e5-labs-helm-repo')
+            version = ''
           }
           steps {
             container('helm') {
