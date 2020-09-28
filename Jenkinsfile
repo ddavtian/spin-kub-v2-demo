@@ -67,7 +67,7 @@ pipeline {
                 sh "helm repo add e5-labs-helm https://nexus.e5labs.com/repository/helm-hosted/"
                 sh "helm package chart"
                 sh '''
-                   version=$(grep '\d.\d.\d' chart/Chart.yaml | awk '{print $2}')"
+                   version=$(grep "\d.\d.\d" chart/Chart.yaml | awk '{print $2}')
                    '''
                 sh "curl -u $HELM_CREDS https://nexus.e5labs.com/repository/helm-hosted/ --upload-file spin-kub-v2-demo-${version}.tgz -v"
             }
