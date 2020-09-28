@@ -67,8 +67,10 @@ pipeline {
                 sh "apk --no-cache add curl"
                 sh "helm repo add e5-labs-helm https://nexus.e5labs.com/repository/helm-hosted/"
                 sh "helm package chart"
-                version = sh(script: "grep '0.1.1' chart/Chart.yaml | awk '{print \$2}'", returnStdout: true).trim()
-                sh "curl -u $HELM_CREDS https://nexus.e5labs.com/repository/helm-hosted/ --upload-file spin-kub-v2-demo-${version}.tgz -v"
+                script {
+                  version = sh(script: "grep '0.1.1' chart/Chart.yaml | awk '{print \$2}'", returnStdout: true).trim()
+                  sh "curl -u $HELM_CREDS https://nexus.e5labs.com/repository/helm-hosted/ --upload-file spin-kub-v2-demo-${version}.tgz -v"
+                }
             }
           }
         }
